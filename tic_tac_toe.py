@@ -17,3 +17,17 @@ of the winning combinations)
 9 spaces are occupied)
 
 """
+
+def create_grid():
+    init_grid = """
+            =====    =====    =====
+              1        2        3
+            =====    =====    =====
+              4        5        6
+            =====    =====    =====
+              7        8        9
+            =====    =====    =====
+"""
+
+    return init_grid
+
