@@ -172,3 +172,15 @@ def check_whether_to_continue_playing(played_positions_dict):
             return ("Continue", "")
     else:
         return who_won
+
+
+# --------------------------------------------------
+# Novice engine
+# --------------------------------------------------
+
+
+def novice_engine_chooses(played_positions_dict):
+    # place at any empty position
+    return random.choice(
+        [key for key, value in played_positions_dict.items() if value == False]
+    )
