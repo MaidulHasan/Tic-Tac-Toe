@@ -261,7 +261,7 @@ def choose_engine_to_play_against():
     if engine == "":
         engine = "2"
     if engine in ["1", "2", "3"]:
-        return available_engines[int(engine)]
+        return available_engines[int(engine)], int(engine)
     else:
         print("Invalid input.")
         choose_engine_to_play_against()
@@ -274,7 +274,7 @@ def choose_engine_to_play_against():
 
 def welcome_msg(initial_grid):
     print(
-        "Hello! The grid for this Tic-Tac-Toe game is numbered and arranged like the this --"
+        "Hello! The grid for this Tic-Tac-Toe game is numbered and arranged like the following --"
     )
     print(initial_grid, end="\n")
     print(
@@ -313,7 +313,7 @@ def playing_algorithm(chosen_engine=beginner_engine_chooses):
                 continue
         elif who_won == "Draw":
             print(
-                f"\n\n\nCongratulations to the Player for his/her valliant effort. But, the game was drawn. Better luck next time.\n\n"
+                f"\n\n\nCongratulations to the Player for your valliant effort. But, the game was drawn. Better luck next time.\n\n"
             )
             break
         else:
@@ -342,13 +342,13 @@ def start_playing():
         "3) Competenet engine: Somewhat intelligent. Tries to block you from winning and also to win itself. But doesn't consider more than one step ahead."
     )
     print(
-        "\nPlease note that by default the playing mode is set to the 'Beginner engine'"
+        "\nPlease note that by default the playing mode is set to the 'Beginner engine'.\n"
     )
 
-    chosen_engine = choose_engine_to_play_against()
+    chosen_engine, engine_id = choose_engine_to_play_against()
 
     temp = {1: "Novice engine", 2: "Beginner engine", 3: "Competent engine"}
-    print(f"You have chosen to play against the {temp.get(chosen_engine)}\n\n")
+    print(f"\n\nYou have chosen to play against the {temp.get(engine_id)}.\n\n")
 
     welcome_msg(playing_grid)
 
