@@ -35,6 +35,7 @@ def create_grid():
 
     return init_grid
 
+
 # --------------------------------------------------
 # Global variables (played positions dict, winning combinations etc)
 # --------------------------------------------------
@@ -116,3 +117,58 @@ def place_input_on_the_playing_grid(symbol_to_place: str, pos_to_place_symbol_on
     # we also need to update the played_positions dictionary
     played_positions.update({pos_to_place_symbol_on: symbol_to_place})
     return playing_grid
+
+
+# --------------------------------------------------
+# Check whether the game is ("Draw", "") | ("Player", winning_combo) | ("Engine", winning_combo) | ("Continue", "")
+# --------------------------------------------------
+
+# but before we move on we need to check if the game is drawn or
+# whether anyone has already won (someone has won if any of the winning combinations
+# has the same value at all positions i.e, either "X" or, "O"
+# in all 3 positions of a combination)
+
+
+def check_if_draw(played_positions_dict):
+    # if anyone hasn't won and all the positions are occupied
+    """
+    Returns True | False (bool)
+    """
+    if list(played_positions_dict.values()).count(False) == 0:
+        return True
+
+    return False
+
+
+def check_who_won(played_positions_dict):
+    """
+    Returns ("Player", winning_combo) | ("Engine", winning_combo) | None (nonetype)
+    """
+    global winning_combinations
+
+    for ith_combo in winning_combinations:
+        if [played_positions_dict[pos] for pos in ith_combo].count("O") == 3:
+            return ("Player", ith_combo)
+        elif [played_positions_dict[pos] for pos in ith_combo].count("X") == 3:
+            return ("Engine", ith_combo)
+
+    return None
+
+
+def check_whether_to_continue_playing(played_positions_dict):
+    """
+    Returns ("Draw", "") | ("Player", winning_combo) | ("Engine", winning_combo) | ("Continue", "")
+    """
+    # if there hasn't been at least 5 rounds we don't need to check if there's a winner or not
+    if list(played_positions_dict.values()).count(False) >= 5:
+        return ("Continue", "")
+
+    # if no one has won check if draw
+    who_won = check_who_won(played_positions_dict)
+    if who_won == None:
+        if check_if_draw(played_positions_dict) == True:
+            return ("Draw", "")
+        else:
+            return ("Continue", "")
+    else:
+        return who_won
