@@ -184,3 +184,23 @@ def novice_engine_chooses(played_positions_dict):
     return random.choice(
         [key for key, value in played_positions_dict.items() if value == False]
     )
+
+
+# --------------------------------------------------
+# Beginner engine
+# --------------------------------------------------
+
+
+def beginner_engine_chooses(played_positions_dict):
+    global winning_combinations
+
+    # place where the player's winning combination can be blocked else choose randomly
+    for ith_combo in winning_combinations:
+        vals_in_combo = [played_positions_dict[pos] for pos in ith_combo]
+        if vals_in_combo.count("O") == 2 and vals_in_combo.count(False) == 1:
+            # if there's no empty position in that combo then no need to panic
+            return [pos for pos in ith_combo if played_positions[pos] == False][0]
+
+    return random.choice(
+        [key for key, value in played_positions_dict.items() if value == False]
+    )
