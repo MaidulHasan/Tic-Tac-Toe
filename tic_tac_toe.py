@@ -265,3 +265,21 @@ def choose_engine_to_play_against():
     else:
         print("Invalid input.")
         choose_engine_to_play_against()
+
+
+# --------------------------------------------------
+# Welcome message
+# --------------------------------------------------
+
+
+def welcome_msg(initial_grid):
+    print(
+        "Hello! The grid for this Tic-Tac-Toe game is numbered and arranged like the this --"
+    )
+    print(initial_grid, end="\n")
+    print(
+        "To choose a position you should enter the corresponding number of that position."
+    )
+    print(
+        "I (the computer engine) will be playing with the symbol 'X' and you (the player) will be playing with the symbol 'O'.\n\n"
+    )
