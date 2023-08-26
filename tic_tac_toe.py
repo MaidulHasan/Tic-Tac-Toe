@@ -35,6 +35,23 @@ def create_grid():
 
     return init_grid
 
+# --------------------------------------------------
+# Global variables (played positions dict, winning combinations etc)
+# --------------------------------------------------
+
+played_positions = {key: False for key in range(1, 10)}
+
+# winning combinations
+
+row_positions = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+column_positions = [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+diagonal_positions = [[1, 5, 9], [3, 5, 7]]
+
+winning_combinations = row_positions + column_positions + diagonal_positions
+
+turn_of_player = True  # false meaning it is the turn of the engine
+
+playing_grid = create_grid()
 
 # --------------------------------------------------
 # prompt the human player until a valid input is provided
