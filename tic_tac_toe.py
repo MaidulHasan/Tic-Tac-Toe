@@ -18,7 +18,7 @@ of the winning combinations)
 
 """
 # --------------------------------------------------
-# create initial grid
+# Create initial grid
 # --------------------------------------------------
 
 
@@ -55,7 +55,7 @@ turn_of_player = True  # false meaning it is the turn of the engine
 playing_grid = create_grid()
 
 # --------------------------------------------------
-# prompt the human player until a valid input is provided
+# Prompt the human player until a valid input is provided
 # --------------------------------------------------
 
 
@@ -283,3 +283,39 @@ def welcome_msg(initial_grid):
     print(
         "I (the computer engine) will be playing with the symbol 'X' and you (the player) will be playing with the symbol 'O'.\n\n"
     )
+
+
+# --------------------------------------------------
+# Playing steps
+# --------------------------------------------------
+def playing_algorithm(chosen_engine=beginner_engine_chooses):
+    global played_positions, winning_combinations, turn_of_player, playing_grid
+
+    while True:
+        who_won, what_combo = check_whether_to_continue_playing(played_positions)
+
+        if who_won == "Continue":
+            if turn_of_player:
+                print("Turn of the Player")
+                _ = place_input_on_the_playing_grid("O", human_player_input())
+                turn_of_player = False
+                print(playing_grid)
+                continue
+            else:
+                print("Turn of the Engine")
+                _ = place_input_on_the_playing_grid(
+                    "X", chosen_engine(played_positions)
+                )
+                turn_of_player = True
+                print(playing_grid)
+                continue
+        elif who_won == "Draw":
+            print(
+                f"\n\n\nCongratulations to the Player for his/her valliant effort. But, the game was drawn. Better luck next time.\n\n"
+            )
+            break
+        else:
+            print(
+                f"\n\n\nCongratulations to the {who_won} for winning the game (Winning combo: {what_combo}).\n\n"
+            )
+            break
