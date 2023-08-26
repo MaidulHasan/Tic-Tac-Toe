@@ -288,6 +288,8 @@ def welcome_msg(initial_grid):
 # --------------------------------------------------
 # Playing steps
 # --------------------------------------------------
+
+
 def playing_algorithm(chosen_engine=beginner_engine_chooses):
     global played_positions, winning_combinations, turn_of_player, playing_grid
 
@@ -319,3 +321,35 @@ def playing_algorithm(chosen_engine=beginner_engine_chooses):
                 f"\n\n\nCongratulations to the {who_won} for winning the game (Winning combo: {what_combo}).\n\n"
             )
             break
+
+
+# --------------------------------------------------
+# Start playing (bring everything together)
+# --------------------------------------------------
+
+
+def start_playing():
+    global playing_grid
+
+    print(
+        "Before we start to play please choose the engine you want to play against. The available engines are,"
+    )
+    print("1) Novice engine: No intelligence")
+    print(
+        "2) Beginner engine: Only focuses on blocking you (the player) from winning and no concern for winning itself."
+    )
+    print(
+        "3) Competenet engine: Somewhat intelligent. Tries to block you from winning and also to win itself. But doesn't consider more than one step ahead."
+    )
+    print(
+        "\nPlease note that by default the playing mode is set to the 'Beginner engine'"
+    )
+
+    chosen_engine = choose_engine_to_play_against()
+
+    temp = {1: "Novice engine", 2: "Beginner engine", 3: "Competent engine"}
+    print(f"You have chosen to play against the {temp.get(chosen_engine)}\n\n")
+
+    welcome_msg(playing_grid)
+
+    playing_algorithm(chosen_engine)
