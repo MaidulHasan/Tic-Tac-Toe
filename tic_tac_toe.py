@@ -241,3 +241,27 @@ def competent_engine_chooses(played_positions_dict):
     return random.choice(
         [key for key, value in played_positions_dict.items() if value == False]
     )
+
+
+# --------------------------------------------------
+# Choose engine to play against
+# --------------------------------------------------
+
+available_engines = {
+    1: novice_engine_chooses,
+    2: beginner_engine_chooses,
+    3: competent_engine_chooses,
+}
+
+
+def choose_engine_to_play_against():
+    global available_engines
+
+    engine = input("Please choose the engine to play against (1-3): \t")
+    if engine == "":
+        engine = "2"
+    if engine in ["1", "2", "3"]:
+        return available_engines[int(engine)]
+    else:
+        print("Invalid input.")
+        choose_engine_to_play_against()
