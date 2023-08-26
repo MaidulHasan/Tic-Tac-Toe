@@ -204,3 +204,40 @@ def beginner_engine_chooses(played_positions_dict):
     return random.choice(
         [key for key, value in played_positions_dict.items() if value == False]
     )
+
+
+# --------------------------------------------------
+# Competent engine
+# --------------------------------------------------
+
+
+def competent_engine_chooses(played_positions_dict):
+    global winning_combinations
+
+    # first priority: choose where the engine has a winning combo
+    for ith_combo in winning_combinations:
+        vals_in_combo = [played_positions_dict[pos] for pos in ith_combo]
+        if vals_in_combo.count("X") == 2 and vals_in_combo.count(False) == 1:
+            # if there's no empty position in that combo then no need to panic
+            return [pos for pos in ith_combo if played_positions[pos] == False][0]
+
+    # second priority: block players winning
+    for ith_combo in winning_combinations:
+        vals_in_combo = [played_positions_dict[pos] for pos in ith_combo]
+        if vals_in_combo.count("O") == 2 and vals_in_combo.count(False) == 1:
+            # if there's no empty position in that combo then no need to panic
+            return [pos for pos in ith_combo if played_positions[pos] == False][0]
+
+    # third priority: choose where the engine has a winning chance in the next round
+    # i.e, when only 1 "X" and 0 "O" in a winning combo
+    for ith_combo in winning_combinations:
+        vals_in_combo = [played_positions_dict[pos] for pos in ith_combo]
+        if vals_in_combo.count("X") == 1 and vals_in_combo.count("O") == 0:
+            return random.choice(
+                [pos for pos in ith_combo if played_positions[pos] == False]
+            )
+
+    # else, choose randomly
+    return random.choice(
+        [key for key, value in played_positions_dict.items() if value == False]
+    )
