@@ -21,6 +21,7 @@ of the winning combinations)
 # create initial grid
 # --------------------------------------------------
 
+
 def create_grid():
     init_grid = """
             =====    =====    =====
@@ -34,9 +35,11 @@ def create_grid():
 
     return init_grid
 
+
 # --------------------------------------------------
 # prompt the human player until a valid input is provided
 # --------------------------------------------------
+
 
 def prompt_human_player(invalid=False):
     if invalid:
@@ -47,9 +50,10 @@ def prompt_human_player(invalid=False):
     )
     return input_from_user
 
+
 # check if user input is valid
-# invalid if 
-# 1) not a number 
+# invalid if
+# 1) not a number
 # 2) the input is not a valid key to the played positions dict
 # 3) the position is not empty
 
@@ -67,9 +71,11 @@ def is_input_valid(user_input):
         return user_input
     else:
         return False
-    
+
+
 # take input from the player
 # prompt until a valid input is chosen
+
 
 def human_player_input():
     input_from_user = prompt_human_player()
@@ -79,3 +85,17 @@ def human_player_input():
 
     return int(input_from_user)
 
+
+# --------------------------------------------------
+# Place the input (both from user and engine) into the grid, update the grid and the played positions
+# --------------------------------------------------
+
+# if turn of player then, symbol: "O" and if turn of engine symbol: "X"
+
+
+def place_input_on_the_playing_grid(symbol_to_place: str, pos_to_place_symbol_on: int):
+    global playing_grid, played_positions
+    playing_grid = playing_grid.replace(f"{pos_to_place_symbol_on}", symbol_to_place)
+    # we also need to update the played_positions dictionary
+    played_positions.update({pos_to_place_symbol_on: symbol_to_place})
+    return playing_grid
