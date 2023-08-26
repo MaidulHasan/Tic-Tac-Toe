@@ -353,3 +353,9 @@ def start_playing():
     welcome_msg(playing_grid)
 
     playing_algorithm(chosen_engine)
+
+
+# --------------------------------------------------
+# Play a round
+# --------------------------------------------------
+start_playing()
